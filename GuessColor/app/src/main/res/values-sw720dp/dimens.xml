@@ -1,0 +1,26 @@
+<resources>
+
+    <dimen name="standard_margin">24dp</dimen>
+    <dimen name="big_margin">48dp</dimen>
+    <dimen name="giant_margin">96dp</dimen>
+
+
+    <dimen name="more_standard_margin">36dp</dimen>
+    <dimen name="mini_margin">12dp</dimen>
+    <dimen name="radius">6dp</dimen>
+    <dimen name="mini_text">12sp</dimen>
+    <dimen name="more_mini_text">18sp</dimen>
+    <dimen name="standard_text">24sp</dimen>
+    <dimen name="more_standard_text">30sp</dimen>
+    <dimen name="big_text">42sp</dimen>
+
+
+    <dimen name="height_line">3dp</dimen>
+    <dimen name="fat_height_line">4dp</dimen>
+
+
+    <dimen name="bar_height">108dp</dimen>
+    <dimen name="block_level_height">72dp</dimen>
+    <dimen name="block_level_weight">96dp</dimen>
+    <dimen name="margin_block_top">-12dp</dimen>
+</resources>
