@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.GridView;
 
 import java.util.ArrayList;
@@ -63,5 +65,11 @@ public class LevelsFragment extends Fragment {
             adapter.notifyDataSetChanged();
         }
         super.onResume();
+    }
+
+
+    public void startWrongAnimation(View view) {
+        Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.wrong);
+        view.startAnimation(anim);
     }
 }

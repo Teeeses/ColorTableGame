@@ -17,8 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.analytics.HitBuilders;
-
 import guesscolor.explead.ru.guesscolor.MainActivity;
 import guesscolor.explead.ru.guesscolor.app.App;
 import guesscolor.explead.ru.guesscolor.beans.Cell;
@@ -74,7 +72,7 @@ public class GameFragment extends Fragment {
             public void onClick(View view) {
                 logic.restart();
                 start();
-                startAnimation();
+                startAroundAnimation();
             }
         });
 
@@ -109,7 +107,7 @@ public class GameFragment extends Fragment {
         createField();
         start();
 
-        startAnimation();
+        startAroundAnimation();
 
         rootLayout.setBackgroundColor(logic.getColors().getBackground());
 
@@ -173,7 +171,7 @@ public class GameFragment extends Fragment {
         }
     }
 
-    public void startAnimation() {
+    public void startAroundAnimation() {
         for(int i = 0; i < logic.getNumber(); i++) {
             for(int j = 0; j < logic.getNumber(); j++) {
                 Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.around);

@@ -3,6 +3,7 @@ package guesscolor.explead.ru.guesscolor.adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import guesscolor.explead.ru.guesscolor.app.App;
 import guesscolor.explead.ru.guesscolor.MainActivity;
 import guesscolor.explead.ru.guesscolor.R;
 import guesscolor.explead.ru.guesscolor.beans.ButtonLevel;
+import guesscolor.explead.ru.guesscolor.fragment.LevelsFragment;
 import guesscolor.explead.ru.guesscolor.logic.Level;
 import guesscolor.explead.ru.guesscolor.utils.Utils;
 
@@ -39,7 +41,8 @@ public class GridAdapter extends BaseAdapter {
         this.array.addAll(array);
         lInflater = (LayoutInflater) MainActivity.getActivity()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        widthCell = (int)(App.getWidthScreen() - MainActivity.getActivity().getResources().getDimension(R.dimen.standard_margin)*8)/3;
+        widthCell = (int)(App.getWidthScreen() - MainActivity.getActivity().getResources().getDimension(R.dimen.mini_margin)*6)/3;
+        Log.d("TAG", Integer.toString((int)MainActivity.getActivity().getResources().getDimension(R.dimen.standard_margin)) + " " + widthCell + " " + App.getWidthScreen());
     }
 
     @Override
@@ -83,7 +86,7 @@ public class GridAdapter extends BaseAdapter {
             viewHolder.tvLevel.setVisibility(View.VISIBLE);
         }
 
-
+        final RelativeLayout clickedLayout = viewHolder.levelLayout;
         viewHolder.levelLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,6 +94,10 @@ public class GridAdapter extends BaseAdapter {
                     App.setLevel(new Level(buttonLevel.getNumber()));
                     ((MainActivity) MainActivity.getActivity()).openGameFragment();
                     ((MainActivity) MainActivity.getActivity()).sendAction(Integer.toString(buttonLevel.getNumber()));
+                } else {
+                    if(MainActivity.getFragment() instanceof LevelsFragment) {
+                        ((LevelsFragment) MainActivity.getFragment()).startWrongAnimation(clickedLayout);
+                    }
                 }
             }
         });
