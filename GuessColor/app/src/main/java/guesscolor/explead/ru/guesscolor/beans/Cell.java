@@ -1,4 +1,4 @@
-package guesscolor.explead.ru.guesscolor;
+package guesscolor.explead.ru.guesscolor.beans;
 
 import android.view.View;
 
