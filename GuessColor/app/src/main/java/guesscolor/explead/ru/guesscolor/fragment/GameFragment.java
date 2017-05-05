@@ -10,6 +10,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -62,6 +64,7 @@ public class GameFragment extends Fragment {
             public void onClick(View view) {
                 logic.restart();
                 start();
+                startAnimation();
             }
         });
 
@@ -95,6 +98,8 @@ public class GameFragment extends Fragment {
 
         createField();
         start();
+
+        startAnimation();
 
         rootLayout.setBackgroundColor(logic.getColors().getBackground());
 
@@ -154,6 +159,15 @@ public class GameFragment extends Fragment {
                         checkWin();
                     }
                 });
+            }
+        }
+    }
+
+    public void startAnimation() {
+        for(int i = 0; i < logic.getNumber(); i++) {
+            for(int j = 0; j < logic.getNumber(); j++) {
+                Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.around);
+                views[i][j].getView().startAnimation(anim);
             }
         }
     }
