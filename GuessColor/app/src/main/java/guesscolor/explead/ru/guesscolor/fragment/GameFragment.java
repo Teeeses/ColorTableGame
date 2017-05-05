@@ -23,6 +23,7 @@ import guesscolor.explead.ru.guesscolor.MainActivity;
 import guesscolor.explead.ru.guesscolor.app.App;
 import guesscolor.explead.ru.guesscolor.beans.Cell;
 import guesscolor.explead.ru.guesscolor.R;
+import guesscolor.explead.ru.guesscolor.logic.Coordinate;
 import guesscolor.explead.ru.guesscolor.logic.Logic;
 
 /**
@@ -57,6 +58,15 @@ public class GameFragment extends Fragment {
         soundPool.load(getActivity(), R.raw.one, 1);
 
         rootLayout = (RelativeLayout) view.findViewById(R.id.rootView);
+
+        ImageView btnBack = (ImageView) view.findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logic.deleteMove();
+                start();
+            }
+        });
 
         ImageView btnRestart = (ImageView) view.findViewById(R.id.btnRestart);
         btnRestart.setOnClickListener(new View.OnClickListener() {
@@ -153,8 +163,8 @@ public class GameFragment extends Fragment {
                 views[i][j].getView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
                         soundPool.play(1, 0.5f, 0.5f, 1, 0, 1f);
+                        logic.addMove(new Coordinate(x, y));
                         update(x, y);
                         checkWin();
                     }
@@ -174,7 +184,6 @@ public class GameFragment extends Fragment {
 
     private void checkWin() {
         if(logic.checkWin()) {
-            logic.nextLevel();
             start();
             ((MainActivity)getActivity()).setCurrentEasyLevel(App.getLevel().getLevel());
             (getActivity()).onBackPressed();

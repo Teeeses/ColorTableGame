@@ -16,6 +16,7 @@ public class Logic {
     private int statusAction = ACTION_PLUS;
 
     private ArrayList<int[][]> allLevels = new ArrayList<>();
+    private ArrayList<Coordinate> moves = new ArrayList<>();
 
     private int table[][];
 
@@ -44,6 +45,7 @@ public class Logic {
 
     public void start(int level) {
         this.level = level-1;
+        clearMoves();
         findLevel(level-1);
         table = new int[number][number];
         colors = allColors.getColors().get(getRandom(0, 0));
@@ -323,5 +325,20 @@ public class Logic {
 
     public int getMany_levels() {
         return many_levels;
+    }
+
+    public void addMove(Coordinate coordinate) {
+        moves.add(coordinate);
+    }
+
+    public void deleteMove() {
+        if(moves.size() != 0) {
+            update(table, moves.get(moves.size()-1).getX(), moves.get(moves.size()-1).getY(), ACTION_MINUS);
+            moves.remove(moves.size()-1);
+        }
+    }
+
+    public void clearMoves() {
+        moves.clear();
     }
 }
