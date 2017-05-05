@@ -95,6 +95,7 @@ public class Logic {
     }
 
     public void restart() {
+        clearMoves();
         int field[][] = allLevels.get(level);
         for(int i = 0; i < number; i++) {
             for(int j = 0; j < number; j++) {
