@@ -1,6 +1,9 @@
 package guesscolor.explead.ru.guesscolor.fragment;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
@@ -17,12 +20,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import guesscolor.explead.ru.guesscolor.DialogWin;
 import guesscolor.explead.ru.guesscolor.MainActivity;
 import guesscolor.explead.ru.guesscolor.app.App;
 import guesscolor.explead.ru.guesscolor.beans.Cell;
 import guesscolor.explead.ru.guesscolor.R;
 import guesscolor.explead.ru.guesscolor.logic.Coordinate;
 import guesscolor.explead.ru.guesscolor.logic.Logic;
+import guesscolor.explead.ru.guesscolor.utils.Utils;
 
 /**
  * Created by develop on 04.05.2017.
@@ -38,7 +43,9 @@ public class GameFragment extends Fragment {
 
     private TextView btnMinus;
     private TextView btnPlus;
+    private ImageView btnBack;
 
+    private TextView tvLevel;
     private Logic logic;
 
     private SoundPool soundPool;
@@ -57,7 +64,10 @@ public class GameFragment extends Fragment {
 
         rootLayout = (RelativeLayout) view.findViewById(R.id.rootView);
 
-        ImageView btnBack = (ImageView) view.findViewById(R.id.btnBack);
+        tvLevel = (TextView) view.findViewById(R.id.tvLevel);
+        tvLevel.setTypeface(Utils.getTypeFaceNumber());
+
+        btnBack = (ImageView) view.findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,6 +124,10 @@ public class GameFragment extends Fragment {
         return view;
     }
 
+    private void setTextLevel() {
+        tvLevel.setText(String.format(getActivity().getResources().getString(R.string.level), App.getLevel().getLevel()));
+    }
+
     private void createField() {
         field = new LinearLayout(getActivity());
         widthField = (int) App.getWidthScreen() - 30;
@@ -130,25 +144,46 @@ public class GameFragment extends Fragment {
     public void createTable() {
         field.removeAllViews();
         int number = logic.getNumber();
-        int margin = 4;
         views = new Cell[number][number];
+        int size = (widthField)/number;
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+
+        Resources res = getActivity().getResources();
+        float sizeText = res.getDimensionPixelSize(R.dimen.standard_text);
+        if(number == 3) {
+            sizeText = res.getDimensionPixelSize(R.dimen.more_standard_text);
+        }
+        if(number == 4) {
+            sizeText = res.getDimensionPixelSize(R.dimen.standard_text);
+        }
+        if(number == 5) {
+            sizeText = res.getDimensionPixelSize(R.dimen.more_mini_text);
+        }
+        if(number == 6) {
+            sizeText = res.getDimensionPixelSize(R.dimen.more_mini_text);
+        }
+
+        Typeface face = Utils.getTypeFaceLevel();
+
 
         for(int i = 0; i < number; i++) {
             LinearLayout lay = new LinearLayout(getActivity());
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, widthField/number);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, size);
             lay.setOrientation(LinearLayout.HORIZONTAL);
             lay.setLayoutParams(params);
             for(int j = 0; j < number; j++) {
-                TextView view = new TextView(getActivity());
-                LinearLayout.LayoutParams viewParam = new LinearLayout.LayoutParams((widthField - margin*2*number)/number, (widthField - margin*2*number)/number);
-                viewParam.setMargins(margin, margin, margin, margin);
-                view.setLayoutParams(viewParam);
+                RelativeLayout layout = (RelativeLayout) inflater.inflate(R.layout.cell, null, false);
+                layout.setLayoutParams(new RelativeLayout.LayoutParams(size, size));
+
+                TextView view = (TextView) layout.findViewById(R.id.cell);
+
+                view.setTypeface(face);
+                view.setTextSize(getContext().getResources().getDimensionPixelSize(R.dimen.standard_text));
                 view.setBackgroundColor(logic.getColors().getMainColor());
-                view.setTextColor(Color.WHITE);
-                view.setTextSize(28);
-                view.setGravity(Gravity.CENTER);
-                view.setText(Integer.toString(logic.getTableValue(i, j)));
-                lay.addView(view);
+                String str = Integer.toString(logic.getTableValue(i, j));
+                view.setText(str);
+                view.setTextSize(sizeText);
+                lay.addView(layout);
                 views[i][j] = new Cell(view);
             }
             field.addView(lay);
@@ -182,9 +217,10 @@ public class GameFragment extends Fragment {
 
     private void checkWin() {
         if(logic.checkWin()) {
-            start();
             ((MainActivity)getActivity()).setCurrentEasyLevel(App.getLevel().getLevel());
-            (getActivity()).onBackPressed();
+            DialogWin dialog = new DialogWin(getContext());
+            dialog.show();
+            App.addLevel();
         }
     }
 
@@ -196,6 +232,14 @@ public class GameFragment extends Fragment {
     public void start() {
         createTable();
         updateColors();
+        setTextLevel();
+        setVisibilityButtonBack();
+    }
+
+    public void nextLevel() {
+        logic.start(App.getLevel().getLevel());
+        start();
+        startAroundAnimation();
     }
 
     private void updateColors() {
@@ -205,11 +249,19 @@ public class GameFragment extends Fragment {
                     views[i][j].getView().setBackgroundColor(logic.getColors().getMainColor());
                 } else if(logic.getTableValue(i, j) > logic.getBigValue()) {
                     views[i][j].getView().setBackgroundColor(MainActivity.getRes().getColor(R.color.dark_red));
-                } else{
+                } else {
                     views[i][j].getView().setBackgroundColor(logic.getColors().getDifferentColor());
                 }
             }
         }
+    }
+
+    public void setVisibilityButtonBack() {
+        if(logic.isEmptyMoves())
+            btnBack.setVisibility(View.INVISIBLE);
+        else
+            btnBack.setVisibility(View.VISIBLE);
+
     }
 
 }

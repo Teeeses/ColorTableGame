@@ -12,10 +12,13 @@
     <dimen name="standard_text">16sp</dimen>
     <dimen name="more_standard_text">20sp</dimen>
     <dimen name="big_text">28sp</dimen>
+    <dimen name="more_big_text">36sp</dimen>
 
 
     <dimen name="height_line">1dp</dimen>
     <dimen name="fat_height_line">2dp</dimen>
+
+    <dimen name="icon_size">48dp</dimen>
 
 
     <dimen name="bar_height">72dp</dimen>

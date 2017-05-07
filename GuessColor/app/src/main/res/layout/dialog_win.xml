@@ -1,9 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/standard_margin"
+    android:background="@android:color/transparent">
 
 
+    <TextView
+        android:id="@+id/tvMenu"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/circle"
+        android:textColor="@color/menu_blue"
+        android:text="Menu"
+        android:textSize="@dimen/standard_text"
+        android:layout_alignBottom="@+id/center"
+        android:gravity="center"/>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tvNext"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/circle"
+        android:textColor="@color/menu_blue"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/center"
+        android:text="Next"
+        android:textSize="@dimen/standard_text"
+        android:gravity="center"/>
+
+    <RelativeLayout
+        android:id="@+id/center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/ivQueen"
+        android:paddingBottom="@dimen/standard_margin">
+
+
+        <TextView
+            android:id="@+id/tvCenter"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/circle"
+            android:textColor="@color/menu_blue"
+            android:text="Level \nComleted"
+            android:textSize="@dimen/more_standard_text"
+            android:gravity="center"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/ivQueen"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/queen"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

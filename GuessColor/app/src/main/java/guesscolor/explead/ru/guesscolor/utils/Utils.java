@@ -17,4 +17,8 @@ public class Utils {
     public static Typeface getTypeFaceLevel() {
         return Typeface.createFromAsset(MainActivity.getActivity().getAssets(),"fonts/level_personal.ttf");
     }
+
+    public static Typeface getTypeFaceNumber() {
+        return Typeface.createFromAsset(MainActivity.getActivity().getAssets(),"fonts/number.ttf");
+    }
 }

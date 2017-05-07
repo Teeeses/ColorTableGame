@@ -22,4 +22,8 @@ public class Level {
     public int getLevel() {
         return level;
     }
+
+    public void addLevel() {
+        level++;
+    }
 }

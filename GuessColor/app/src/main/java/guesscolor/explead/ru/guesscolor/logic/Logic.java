@@ -120,140 +120,27 @@ public class Logic {
         if(current >= 0 && current <= 0) {
             number = 3;
             clicks = 1;
+            return;
         }
-        else if(current >= 1 && current <= 3) {
+        else if(current >= 1 && current <= 2) {
             number = 3;
             clicks = 2;
+            return;
         }
-        else if(current >= 4 && current <= 7) {
+        else if(current >= 3 && current <= 7) {
             number = 3;
-            clicks = 3;
         }
-        else if(current >= 8 && current <= 10) {
+        else if(current >= 8 && current <= 30) {
             number = 4;
-            clicks = 4;
         }
-        else if(current >= 11 && current <= 13) {
-            number = 4;
-            clicks = 5;
+        else if(current >= 31 && current <= 80) {
+            number = 5;
         }
-        else if(current >= 14 && current <= 17) {
-            number = 4;
-            clicks = 6;
-        }
-        else if(current >= 18 && current <= 21) {
-            number = 4;
-            clicks = 7;
-        }
-        else if(current >= 22 && current <= 25) {
-            number = 4;
-            clicks = 7;
-        }
-        else if(current >= 26 && current <= 30) {
-            number = 4;
-            clicks = 8;
-        }
-        else if(current >= 31 && current <= 36) {
-            number = 4;
-            clicks = 9;
+        else if(current >= 81 && current <= 200) {
+            number = 6;
         }
 
-        else if(current >= 37 && current <= 42) {
-            number = 4;
-            clicks = 10;
-        }
-        else if(current >= 43 && current <= 50) {
-            number = 5;
-            clicks = 11;
-        }
-        else if(current >= 51 && current <= 60) {
-            number = 5;
-            clicks = 12;
-        }
-        else if(current >= 61 && current <= 70) {
-            number = 5;
-            clicks = 13;
-        }
-        else if(current >= 71 && current <= 80) {
-            number = 5;
-            clicks = 14;
-        }
-        else if(current >= 81 && current <= 90) {
-            number = 6;
-            clicks = 15;
-        }
-        else if(current >= 91 && current <= 100) {
-            number = 6;
-            clicks = 16;
-        }
-        else if(current >= 101 && current <= 106) {
-            number = 6;
-            clicks = 17;
-        }
-        else if(current >= 107 && current <= 112) {
-            number = 6;
-            clicks = 18;
-        }
-        else if(current >= 113 && current <= 118) {
-            number = 6;
-            clicks = 19;
-        }
-        else if(current >= 119 && current <= 125) {
-            number = 6;
-            clicks = 20;
-        }
-        else if(current >= 126 && current <= 132) {
-            number = 6;
-            clicks = 21;
-        }
-        else if(current >= 133 && current <= 138) {
-            number = 6;
-            clicks = 22;
-        }
-        else if(current >= 139 && current <= 145) {
-            number = 6;
-            clicks = 23;
-        }
-        else if(current >= 146 && current <= 152) {
-            number = 6;
-            clicks = 24;
-        }
-        else if(current >= 153 && current <= 158) {
-            number = 6;
-            clicks = 25;
-        }
-        else if(current >= 159 && current <= 164) {
-            number = 6;
-            clicks = 26;
-        }
-        else if(current >= 165 && current <= 170) {
-            number = 6;
-            clicks = 27;
-        }
-        else if(current >= 171 && current <= 176) {
-            number = 6;
-            clicks = 28;
-        }
-        else if(current >= 177 && current <= 184) {
-            number = 6;
-            clicks = 29;
-        }
-        else if(current >= 185 && current <= 188) {
-            number = 6;
-            clicks = 30;
-        }
-        else if(current >= 189 && current <= 192) {
-            number = 6;
-            clicks = 31;
-        }
-        else if(current >= 193 && current <= 196) {
-            number = 6;
-            clicks = 32;
-        }
-        else if(current >= 197 && current <= 200) {
-            number = 6;
-            clicks = 33;
-        }
+        clicks = current/3 + 2;
 
     }
 
@@ -341,5 +228,12 @@ public class Logic {
 
     public void clearMoves() {
         moves.clear();
+    }
+
+    public boolean isEmptyMoves() {
+        if(moves.size() == 0) {
+            return true;
+        }
+        return false;
     }
 }

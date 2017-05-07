@@ -13,7 +13,7 @@ public class AllColors {
     private ArrayList<Colors> colors = new ArrayList<>();
 
     public AllColors() {
-        colors.add(new Colors(Color.parseColor("#FFDD73"), Color.parseColor("#592680"), Color.parseColor("#06799F")));
+        colors.add(new Colors(Color.parseColor("#4c1342"), Color.parseColor("#92bc2a"), Color.parseColor("#2fa59a")));
     }
 
     public int getSize() {

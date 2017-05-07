@@ -40,6 +40,10 @@ public class App extends Application {
         return mTracker;
     }
 
+    public static void addLevel() {
+        level.addLevel();
+    }
+
     public static float getWidthScreen() {
         return widthScreen;
     }

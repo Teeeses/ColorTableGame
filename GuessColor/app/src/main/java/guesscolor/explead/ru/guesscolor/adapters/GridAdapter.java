@@ -68,19 +68,21 @@ public class GridAdapter extends BaseAdapter {
         final ButtonLevel buttonLevel = (ButtonLevel) getItem(position);
         viewHolder.tvLevel.setText(Integer.toString(buttonLevel.getNumber()));
         if(buttonLevel.getStatus() == ButtonLevel.STATUS_CURRENT) {
-            viewHolder.ivLevel.setBackgroundColor(Color.parseColor("#DF38B1"));
+            //viewHolder.ivLevel.setBackgroundColor(Color.parseColor("#3E0470"));
+            viewHolder.ivLevel.setBackgroundDrawable(MainActivity.getRes().getDrawable(R.drawable.current_cell));
             viewHolder.ivLock.setVisibility(View.GONE);
             viewHolder.ivLevel.setVisibility(View.VISIBLE);
             viewHolder.tvLevel.setVisibility(View.VISIBLE);
         }
         if(buttonLevel.getStatus() == ButtonLevel.STATUS_CLOSE) {
-            viewHolder.ivLevel.setBackgroundColor(Color.parseColor("#3E0470"));
+            //viewHolder.ivLevel.setBackgroundColor(Color.parseColor("#DF38B1"));
             viewHolder.ivLock.setVisibility(View.VISIBLE);
             viewHolder.ivLevel.setVisibility(View.GONE);
             viewHolder.tvLevel.setVisibility(View.GONE);
         }
         if(buttonLevel.getStatus() == ButtonLevel.STATUS_OPEN) {
-            viewHolder.ivLevel.setBackgroundColor(Color.parseColor("#AD66D5"));
+            //viewHolder.ivLevel.setBackgroundColor(Color.parseColor("#AD66D5"));
+            viewHolder.ivLevel.setBackgroundDrawable(MainActivity.getRes().getDrawable(R.drawable.open_cell));
             viewHolder.ivLock.setVisibility(View.GONE);
             viewHolder.ivLevel.setVisibility(View.VISIBLE);
             viewHolder.tvLevel.setVisibility(View.VISIBLE);
@@ -91,9 +93,11 @@ public class GridAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 if(buttonLevel.getStatus() == ButtonLevel.STATUS_OPEN || buttonLevel.getStatus() == ButtonLevel.STATUS_CURRENT) {
-                    App.setLevel(new Level(buttonLevel.getNumber()));
-                    ((MainActivity) MainActivity.getActivity()).openGameFragment();
-                    ((MainActivity) MainActivity.getActivity()).sendAction(Integer.toString(buttonLevel.getNumber()));
+                    if(MainActivity.getFragment() instanceof LevelsFragment) {
+                        App.setLevel(new Level(buttonLevel.getNumber()));
+                        ((MainActivity) MainActivity.getActivity()).openGameFragment();
+                        ((MainActivity) MainActivity.getActivity()).sendAction(Integer.toString(buttonLevel.getNumber()));
+                    }
                 } else {
                     if(MainActivity.getFragment() instanceof LevelsFragment) {
                         ((LevelsFragment) MainActivity.getFragment()).startWrongAnimation(clickedLayout);
