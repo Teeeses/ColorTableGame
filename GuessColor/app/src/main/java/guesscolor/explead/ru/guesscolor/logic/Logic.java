@@ -1,7 +1,5 @@
 package guesscolor.explead.ru.guesscolor.logic;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -72,11 +70,17 @@ public class Logic {
                 table[i][j] = bigValue;
             }
         }
+        int last_x = -1;
+        int last_y = -1;
         for(int i = 0; i < clicks; i++) {
-            int x = getRandom(0, number-1);
-            int y = getRandom(0, number-1);
+            int x, y;
+            do {
+                x = getRandom(0, number - 1);
+                y = getRandom(0, number - 1);
+            } while (last_x == x && last_y == y);
+            last_x = x;
+            last_y = y;
             clicksTable[x][y]++;
-            Log.d("TAG", "x: " + Integer.toString(x) + " y: " + Integer.toString(y));
         }
         for(int i = 0; i < number; i++) {
             for(int j = 0; j < number; j++) {
